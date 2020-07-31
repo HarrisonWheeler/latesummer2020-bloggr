@@ -8,11 +8,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     profile: {},
+    allPosts: {},
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
     },
+    setAllPosts(state, allPosts) {
+      state.allPosts = allPosts
+    }
   },
   actions: {
     setBearer({ }, bearer) {
@@ -21,10 +25,11 @@ export default new Vuex.Store({
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
-    async getAllPosts() {
+    async getAllPosts({ commit, dispatch }) {
       try {
-        let res = await api.get("")
+        let res = await api.get("blogs")
         console.log(res);
+        commit("setAllPosts", res.data)
       } catch (error) {
 
       }

@@ -1,7 +1,7 @@
 <template>
   <div class="about text-center">
     <h1>Welcome {{ profile.name }}</h1>
-    <img class="rounded" :src="profile.picture" alt="" />
+    <img class="rounded" :src="profile.picture" alt />
     <p>{{ profile.email }}</p>
   </div>
 </template>
@@ -12,8 +12,9 @@ export default {
   computed: {
     profile() {
       return this.$store.state.profile;
-    }
-  }
+    },
+  },
+  methods: {},
 };
 </script>
 
