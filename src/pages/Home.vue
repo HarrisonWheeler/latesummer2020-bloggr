@@ -6,7 +6,7 @@
           <div class="card-body text-center">
             <h5 class="card-title">{{blog.title}}</h5>
             <p class="card-text">{{blog.body}}</p>
-            <a href="#" class="btn btn-info" @click="goToBlogInfo(blog.id)">Get details</a>
+            <a href="#" class="btn btn-info" @click="goToBlogInfo(blog.id)">Get Details/Comments</a>
             <p>{{blog.creatorEmail}}</p>
           </div>
         </div>

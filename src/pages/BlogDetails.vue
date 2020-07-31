@@ -3,10 +3,15 @@
     <div class="card-columns justify-content-center p-2">
       <div class="card bg-primary text-light" style="width: 25rem">
         <div class="card-body text-center">
-          <h5 class="card-title">{{activeBlog.title}}</h5>
+          <h4 class="card-title">
+            <u>{{activeBlog.title}}</u>
+          </h4>
           <p class="card-text">{{activeBlog.body}}</p>
+          <h5>
+            <u>Comments:</u>
+          </h5>
           <comments v-for="comment in activeComments" :commentData="comment" :key="comment.id" />
-          <p></p>
+          <p>Created By: {{activeBlog.creatorEmail}}</p>
         </div>
       </div>
     </div>
