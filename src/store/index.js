@@ -8,14 +8,22 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     profile: {},
-    allPosts: {},
+    allBlogs: {},
+    activeBlogs: {},
+    activeComments: {},
   },
   mutations: {
     setProfile(state, profile) {
       state.profile = profile;
     },
-    setAllPosts(state, allPosts) {
-      state.allPosts = allPosts
+    setAllBlogs(state, allBlogs) {
+      state.allBlogs = allBlogs
+    },
+    setActiveBlogs(state, activeBlogs) {
+      state.activeBlogs = activeBlogs
+    },
+    setActiveComments(state, activeComments) {
+      state.activeComments = activeComments
     }
   },
   actions: {
@@ -25,13 +33,23 @@ export default new Vuex.Store({
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
-    async getAllPosts({ commit, dispatch }) {
+    async getAllBlogs({ commit, dispatch }) {
       try {
         let res = await api.get("blogs")
         console.log(res);
-        commit("setAllPosts", res.data)
+        commit("setAllBlogs", res.data)
       } catch (error) {
-
+        console.error(error)
+      }
+    },
+    async getBlog({ commit, dispatch }, blogId) {
+      try {
+        let res = await api.get("/blogs/" + blogId)
+        console.log(res.data);
+        commit("setActiveBlogs", res.data.blog)
+        commit("setActiveComments", res.data.comments)
+      } catch (error) {
+        console.error(error)
       }
     },
     async getProfile({ commit }) {
