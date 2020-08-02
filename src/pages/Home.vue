@@ -1,13 +1,13 @@
 <template>
-  <div class="home container-fluid bg-secondary">
+  <div class="home container-fluid bg-secondary p-2">
     <div class="card-columns justify-content-center p-2">
       <div v-for="blog in allBlogs" :key="blog.blogId">
         <div class="card bg-primary text-light" style="width: 25rem">
           <div class="card-body text-center">
             <h5 class="card-title">{{blog.title}}</h5>
             <p class="card-text">{{blog.body}}</p>
-            <a href="#" class="btn btn-info" @click="goToBlogInfo(blog.id)">Get Details/Comments</a>
-            <p>{{blog.creatorEmail}}</p>
+            <a href="#" class="btn btn-info" @click="goToBlogInfo(blog.id)">See More</a>
+            <p>Created By: {{blog.creatorEmail}}</p>
           </div>
         </div>
       </div>

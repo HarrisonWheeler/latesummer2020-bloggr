@@ -1,8 +1,19 @@
 <template>
-  <div class="about text-center">
+  <div class="container-fluid about text-center">
+    <div class="row">
+      <div class="col-12">
     <h1>Welcome {{ profile.name }}</h1>
     <img class="rounded" :src="profile.picture" alt />
     <p>{{ profile.email }}</p>
+      </div>
+    </div>
+      <div class="container-fluid">
+        <div class="row p-2">
+         <div class="col-12">
+          <h1>Your Posts:</h1>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,7 +25,14 @@ export default {
       return this.$store.state.profile;
     },
   },
-  methods: {},
+  mounted(){
+    this.getProfile()
+  },
+  methods: {
+    getProfile(){
+      this.$store.dispatch("getProfile")
+    }
+  },
 };
 </script>
 

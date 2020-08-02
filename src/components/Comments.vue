@@ -1,5 +1,8 @@
 <template>
   <div class="comments">
+    <h5>
+      <u>{{commentData.creator.name}}:</u>
+    </h5>
     <p>{{commentData.body}}</p>
   </div>
 </template>

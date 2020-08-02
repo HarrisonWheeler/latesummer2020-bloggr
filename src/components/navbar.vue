@@ -10,7 +10,7 @@
         />
       </div>
       <div>
-        <h3 style="color: green">PC Buildr</h3>
+        <h3 style="color: green">Bloggr</h3>
       </div>
     </router-link>
     <button
@@ -27,14 +27,14 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" :class="{ active: $route.name == 'Home' }">
-          <router-link :to="{ name: 'Home' }" class="nav-link">Home</router-link>
+          <router-link :to="{ name: 'Home' }" class="nav-link text-light">Home</router-link>
         </li>
         <li
           class="nav-item"
           v-if="$auth.isAuthenticated"
           :class="{ active: $route.name == 'Profile' }"
         >
-          <router-link class="nav-link" :to="{ name: 'Profile' }">Profile</router-link>
+          <router-link class="nav-link text-light" :to="{ name: 'Profile' }">Profile</router-link>
         </li>
       </ul>
       <button
