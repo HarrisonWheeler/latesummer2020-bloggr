@@ -11,6 +11,7 @@ export default new Vuex.Store({
     allBlogs: {},
     activeBlogs: {},
     activeComments: {},
+    myBlogs: {},
   },
   mutations: {
     setProfile(state, profile) {
@@ -24,6 +25,10 @@ export default new Vuex.Store({
     },
     setActiveComments(state, activeComments) {
       state.activeComments = activeComments
+      console.log(state.activeComments);
+    },
+    setMyBlogs(state, myBlogs) {
+      state.myBlogs = myBlogs
     }
   },
   actions: {
@@ -45,9 +50,9 @@ export default new Vuex.Store({
     async getBlog({ commit, dispatch }, blogId) {
       try {
         let res = await api.get("/blogs/" + blogId)
-        console.log(res.data);
         commit("setActiveBlogs", res.data.blog)
         commit("setActiveComments", res.data.comments)
+
       } catch (error) {
         console.error(error)
       }
@@ -63,7 +68,7 @@ export default new Vuex.Store({
     async createBlog({ commit, dispatch, state }, blogData) {
       try {
         let res = await api.post("blogs", blogData)
-        console.log(res.data);
+        commit("setMyBlogs", blogData)
         dispatch("getAllBlogs")
       } catch (error) {
         console.error(error)
@@ -74,9 +79,25 @@ export default new Vuex.Store({
         let res = await api.post("comments", commentData)
         console.log(res.data);
         dispatch("getBlog", commentData.blogId)
+        commit("setActiveComments", commentData)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteComment({ commit, dispatch, state }, commentData) {
+      try {
+        // debugger
+        let res = await api.delete("comments/" + commentData.id)
+        commit("setActiveComments", {})
+        console.log(res.data);
+        dispatch("getBlog", commentData.blogId)
+        // debugger
       } catch (error) {
         console.error(error)
       }
     }
   },
 });
+
+
+// 5f2741b0f2cc7d0017b85a85 - comment id from delete method

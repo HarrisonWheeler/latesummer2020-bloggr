@@ -3,7 +3,15 @@
     <h5>
       <u>{{commentData.creator.name}}:</u>
     </h5>
-    <p>{{commentData.body}}</p>
+    <div>
+      <button
+        v-if="$auth.isAuthenticated"
+        type="button"
+        class="text-danger close"
+        @click="deleteComment"
+      >&times;</button>
+      <p>{{commentData.body}}</p>
+    </div>
   </div>
 </template>
 
@@ -15,8 +23,22 @@ export default {
   data() {
     return {};
   },
-  computed: {},
-  methods: {},
+  computed: {
+    activeComments() {
+      return this.$store.state.activeComments.id;
+    },
+    activeBlog() {
+      return this.$store.state.activeBlog;
+    },
+  },
+  methods: {
+    deleteComment() {
+      this.$store.dispatch("deleteComment", {
+        id: this.commentData.id,
+        blogId: this.$store.activeBlog,
+      });
+    },
+  },
   components: {},
 };
 </script>
