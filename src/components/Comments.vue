@@ -1,5 +1,5 @@
 <template>
-  <div class="comments">
+  <div v-if="commentData.creator" class="comments">
     <h5>
       <u>{{commentData.creator.name}}:</u>
     </h5>
@@ -21,7 +21,9 @@ export default {
   name: "comments",
   props: ["commentData"],
   data() {
-    return {};
+    return {
+      body: "",
+    };
   },
   computed: {
     activeComments() {

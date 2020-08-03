@@ -6,13 +6,13 @@
           <h4 class="card-title">
             <u>{{activeBlog.title}}</u>
             <button
-              v-if="$auth.isAuthenticated"
+              v-if="$auth.user && $auth.user.email == activeBlog.creatorEmail"
               type="button"
               class="text-danger close"
               @click="deleteBlog()"
             >&times;</button>
           </h4>
-          <img :src="activeBlog.creator.picture" class="img-fluid" alt />
+          <img v-if="activeBlog.creator" :src="activeBlog.creator.picture" class="img-fluid" alt />
           <p class="card-text">{{activeBlog.body}}</p>
           <h5>
             <u>Comments:</u>
@@ -64,7 +64,9 @@ import Comments from "../components/Comments";
 export default {
   name: "blog-details",
   data() {
-    return {};
+    return {
+      newComment: {},
+    };
   },
   computed: {
     activeBlog() {

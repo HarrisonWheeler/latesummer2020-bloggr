@@ -41,11 +41,14 @@ export default {
   props: ["editBlogData"],
   data() {
     return {
-      editedBlog: {},
+      // editedBlog: {},
     };
   },
   computed: {
     editedBlog() {
+      return this.$store.state.activeBlogs;
+    },
+    activeBlogs() {
       return this.$store.state.activeBlogs;
     },
   },
@@ -53,8 +56,8 @@ export default {
     editBlog() {
       debugger;
       this.$store.dispatch("editBlog", {
-        body: this.editedBlog,
-        _id: this.editedBlog.id,
+        body: this.editedBlog.body,
+        _id: this.activeBlogs.id,
       });
       this.editedBlog = {};
       $("#edit-modal").modal("hide");
