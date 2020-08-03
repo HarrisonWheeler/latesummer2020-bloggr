@@ -73,9 +73,7 @@ export default new Vuex.Store({
     },
     async deleteBlog({ commit, dispatch, state }, blogId) {
       try {
-        debugger
         let res = await api.delete("blogs/" + blogId)
-        commit("setActiveBlogs", {})
         dispatch("getAllBlogs")
       } catch (error) {
         console.error(error)
@@ -83,7 +81,6 @@ export default new Vuex.Store({
     },
     async editBlog({ commit, dispatch }, blogData) {
       try {
-        debugger
         let res = await api.put("blogs/" + blogData._id, blogData)
         commit("setActiveBlogs", {})
         dispatch("getBlog", blogData._id)
@@ -104,7 +101,6 @@ export default new Vuex.Store({
     },
     async deleteComment({ commit, dispatch, state }, commentData) {
       try {
-        // debugger
         let res = await api.delete("comments/" + commentData.id)
         dispatch("getBlog", this.state.activeBlogs.id)
         console.log(res);

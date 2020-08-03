@@ -9,7 +9,7 @@
               v-if="$auth.user && $auth.user.email == activeBlog.creatorEmail"
               type="button"
               class="text-danger close"
-              @click="deleteBlog()"
+              @click="deleteBlog"
             >&times;</button>
           </h4>
           <img v-if="activeBlog.creator" :src="activeBlog.creator.picture" class="img-fluid" alt />
@@ -89,7 +89,6 @@ export default {
       this.newComment = "";
     },
     deleteBlog() {
-      debugger;
       this.$store.dispatch("deleteBlog", this.$route.params.id);
     },
   },

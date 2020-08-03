@@ -54,9 +54,8 @@ export default {
   },
   methods: {
     editBlog() {
-      debugger;
       this.$store.dispatch("editBlog", {
-        body: this.editedBlog.body,
+        body: this.editedBlog,
         _id: this.activeBlogs.id,
       });
       this.editedBlog = {};

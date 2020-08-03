@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Home from "../pages/Home.vue";
 // @ts-ignore
 import Profile from "../pages/Profile.vue";
+// @ts-ignore
 import { authGuard } from "@bcwdev/auth0-vue";
 
 Vue.use(VueRouter);
@@ -17,11 +18,13 @@ const routes = [
   {
     path: "/blogs/:id",
     name: "Blog",
+    // @ts-ignore
     component: () => import(/* webpackChunkName: "blogdetails" */ '../pages/BlogDetails.vue')
   },
   {
     path: "/blog/:id",
     name: "Comments",
+    // @ts-ignore
     component: () => import(/* webpackChunkName: "comments" */ '../components/Comments.vue')
   },
   {
