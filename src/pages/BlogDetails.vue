@@ -9,7 +9,7 @@
               v-if="$auth.isAuthenticated"
               type="button"
               class="text-danger close"
-              @click="deleteBlog(activeBlog._id)"
+              @click="deleteBlog()"
             >&times;</button>
           </h4>
           <img :src="activeBlog.creator.picture" class="img-fluid" alt />
@@ -40,6 +40,16 @@
               </div>
             </div>
           </form>
+          <div class="row justify-content-center">
+            <button
+              type="button"
+              class="btn btn-info"
+              data-toggle="modal"
+              data-target="#edit-modal"
+              v-if="$auth.isAuthenticated"
+            >Edit Blog!</button>
+            <EditModal />
+          </div>
           <p>Created By: {{activeBlog.creatorEmail}}</p>
         </div>
       </div>
@@ -49,14 +59,12 @@
 
 
 <script>
+import EditModal from "../components/EditModal";
 import Comments from "../components/Comments";
 export default {
   name: "blog-details",
   data() {
     return {};
-  },
-  mounted() {
-    this.$store.dispatch("getBlog", this.$route.params.id);
   },
   computed: {
     activeBlog() {
@@ -66,9 +74,11 @@ export default {
       return this.$store.state.activeComments;
     },
   },
+  mounted() {
+    this.$store.dispatch("getBlog", this.$route.params.id);
+  },
   methods: {
     createComment() {
-      // debugger;
       this.$store.dispatch("createComment", {
         body: this.newComment,
         blogId: this.activeBlog._id,
@@ -83,6 +93,7 @@ export default {
   },
   components: {
     Comments,
+    EditModal,
   },
 };
 </script>

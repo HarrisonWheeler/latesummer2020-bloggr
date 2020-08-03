@@ -10,8 +10,7 @@ export default new Vuex.Store({
     profile: {},
     allBlogs: {},
     activeBlogs: {},
-    activeComments: {},
-    myBlogs: {},
+    activeComments: [],
   },
   mutations: {
     setProfile(state, profile) {
@@ -20,16 +19,14 @@ export default new Vuex.Store({
     setAllBlogs(state, allBlogs) {
       state.allBlogs = allBlogs
     },
-    setActiveBlogs(state, activeBlogs) {
-      state.activeBlogs = activeBlogs
+    setActiveBlogs(state, payload) {
+      state.activeBlogs = payload.blog
+      state.activeComments = payload.comments
     },
     setActiveComments(state, activeComments) {
       state.activeComments = activeComments
       console.log(state.activeComments);
     },
-    setMyBlogs(state, myBlogs) {
-      state.myBlogs = myBlogs
-    }
   },
   actions: {
     setBearer({ }, bearer) {
@@ -49,11 +46,10 @@ export default new Vuex.Store({
     },
     async getBlog({ commit, dispatch }, blogId) {
       try {
-        // debugger
         let res = await api.get("/blogs/" + blogId)
         console.log(res.data);
-        commit("setActiveBlogs", res.data.blog)
-        commit("setActiveComments", res.data.comments)
+        commit("setActiveBlogs", res.data)
+
 
       } catch (error) {
         console.error(error)
@@ -77,11 +73,20 @@ export default new Vuex.Store({
     },
     async deleteBlog({ commit, dispatch, state }, blogId) {
       try {
-
+        debugger
         let res = await api.delete("blogs/" + blogId)
         commit("setActiveBlogs", {})
-        console.log(res);
         dispatch("getAllBlogs")
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async editBlog({ commit, dispatch }, blogData) {
+      try {
+        debugger
+        let res = await api.put("blogs/" + blogData._id, blogData.body)
+        commit("setActiveBlogs", {})
+        dispatch("getBlog", blogData._id)
       } catch (error) {
         console.error(error)
       }
@@ -101,8 +106,8 @@ export default new Vuex.Store({
       try {
         debugger
         let res = await api.delete("comments/" + commentData.id)
-        commit("setActiveComments", {})
-        dispatch("getBlog", commentData.blogId)
+        commit("setActiveComments",)
+        dispatch("getBlog", commentData.id)
         console.log(res);
       } catch (error) {
         console.error(error)
