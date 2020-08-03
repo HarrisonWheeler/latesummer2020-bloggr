@@ -35,12 +35,13 @@ export default {
     deleteComment() {
       this.$store.dispatch("deleteComment", {
         id: this.commentData.id,
-        blogId: this.$store.activeBlog,
+        // blogId: this.$store.activeBlog,
       });
     },
   },
   components: {},
 };
+// 5f277938f2cc7d0017b85b19 - comment data
 </script>
 
 

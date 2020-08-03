@@ -5,6 +5,12 @@
         <div class="card-body text-center">
           <h4 class="card-title">
             <u>{{activeBlog.title}}</u>
+            <button
+              v-if="$auth.isAuthenticated"
+              type="button"
+              class="text-danger close"
+              @click="deleteBlog(activeBlog._id)"
+            >&times;</button>
           </h4>
           <img :src="activeBlog.creator.picture" class="img-fluid" alt />
           <p class="card-text">{{activeBlog.body}}</p>
@@ -62,11 +68,17 @@ export default {
   },
   methods: {
     createComment() {
+      // debugger;
       this.$store.dispatch("createComment", {
         body: this.newComment,
         blogId: this.activeBlog._id,
-        creatorEmail: this.activeComments.creatorEmail,
+        creatorEmail: this.activeBlog.creatorEmail,
       });
+      this.newComment = "";
+    },
+    deleteBlog() {
+      debugger;
+      this.$store.dispatch("deleteBlog", this.$route.params.id);
     },
   },
   components: {
